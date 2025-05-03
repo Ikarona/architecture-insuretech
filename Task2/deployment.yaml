@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scale-test
+  labels:
+    app: scale-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scale-test
+  template:
+    metadata:
+      labels:
+        app: scale-test
+    spec:
+      containers:
+      - name: scale-test
+        image: shestera/scaletestapp:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "20Mi"
+          limits:
+            memory: "30Mi"
+      - name: memhog
+        image: busybox
+        command:
+          - sh
+          - -c
+          - |
+            dd if=/dev/zero of=/dev/shm/fill bs=1M count=25
+            sleep 3600
+        resources:
+          requests:
+            memory: "25Mi"
