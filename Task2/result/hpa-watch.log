@@ -1,0 +1,6 @@
+ikarona@ikarona:~/architecture-insuretech$ kubectl get hpa scale-test-hpa --watch
+NAME             REFERENCE               TARGETS           MINPODS   MAXPODS   REPLICAS   AGE
+scale-test-hpa   Deployment/scale-test   memory: 59%/80%   1         10        1          141m
+scale-test-hpa   Deployment/scale-test   memory: 104%/80%   1         10        1          142m
+scale-test-hpa   Deployment/scale-test   memory: 104%/80%   1         10        2          142m
+scale-test-hpa   Deployment/scale-test   memory: 82%/80%    1         10        2          143m
